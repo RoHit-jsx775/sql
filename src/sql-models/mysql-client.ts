@@ -6,7 +6,7 @@ const pool = mysql.createPool({
   port: Number(process.env.DB_PORT) || 3306, // port number of the MySQL server
   user: process.env.DB_USER || "root", // username for the MySQL server
   password: process.env.DB_PASSWORD || "password", // password for the MySQL server
-  database: process.env.DB_NAME || "ecommerce", // name of the database to connect to
+  database: process.env.DB_NAME || "ecom_app", // name of the database to connect to
   connectionLimit: 10, // maximum number of connections to create at once
   waitForConnections: true, // wait for a connection to be available if all are in use
   queueLimit: 0, // maximum number of connection requests to queue before returning an error
