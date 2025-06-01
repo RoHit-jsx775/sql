@@ -45,7 +45,7 @@ export const updateProductController = async (req: Request, res: Response) => {
   const { name, price, categoryId } = req.body;
 
   try {
-    const updatedProduct = await SqlProductModel.Updated(id, {
+    const updatedProduct = await SqlProductModel.Update(id, {
       name,
       price,
       categoryId,

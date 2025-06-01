@@ -2,12 +2,15 @@ import express, { Request, Response, NextFunction } from "express";
 import productsroutes from "./routes/productsroutes";
 import { error } from "console";
 import categoryroutes from "./routes/category";
+import usersroutes from "./routes/userroutes";
+import orderroutes from "./routes/order";
 
 const app = express();
 app.use(express.json());
 app.use("/products", productsroutes);
 app.use("/categories",categoryroutes);
-
+app.use("/users", usersroutes);
+app.use("/orders",orderroutes)
 
 // const lock = "ram";
 // app.get(

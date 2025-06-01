@@ -43,7 +43,7 @@ export const SqlProductModel = {
   //   ]);
   //   return this.getById(id);
   // },
-    async Updated(
+    async Update(
     id: number,
     p0: { name?:string; price?:number;  categoryId?: number; }
   ) {
@@ -58,14 +58,14 @@ export const SqlProductModel = {
         throw new Error(`Product with id ${id} not found`);
       }
 
-      const updatedProduct = {
+      const updateProduct = {
         ...rows[0],
         name: p0.name,
         price: p0.price,
        categoryId: p0.categoryId,
       };
 
-      console.log("Updating product with data:", updatedProduct);
+      console.log("Updating product with data:", updateProduct);
 
       await pool.query(
         "UPDATE products SET name=?, price=?, categoryId=? WHERE id = ?",
@@ -74,7 +74,7 @@ export const SqlProductModel = {
 
       console.log(`Product with id ${id} updated successfully`);
 
-      return updatedProduct;
+      return updateProduct;
     } catch (error) {
       console.error("SQL error:", error);
       throw error;

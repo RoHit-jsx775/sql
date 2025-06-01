@@ -56,5 +56,6 @@ export const SqlCategoryModel = {
   const [newCategory] = await pool.query<any[]>(
     "SELECT * FROM categories WHERE id = ?",[newcategoryId]
   );
+  return newCategory[0];
 },
 };
