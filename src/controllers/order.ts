@@ -28,6 +28,7 @@ export const createOrder = async (
   res: Response,
   next: NextFunction
 ) => {
+  const { userId, productIds } = req.body;
   const error = validateOrderInput(req.body);
   if (error) {
     res.status(400).json({ message: error });
@@ -39,4 +40,63 @@ export const createOrder = async (
   } catch (err) {
     next(err);
   }
+
 };
+export const getOrderById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+)=>{
+  const id = parseInt(req.params.id);
+  console.log("Fetching order with id:", id);
+  try {
+    const order = await SqlOrderModel.getorderById(id);
+    res.status(200).json(order);
+  } catch (error) {
+    next(error);
+  }
+}
+export const getAllOrders = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+)=>{
+  try {
+    const orders = await SqlOrderModel.getAllOrders();
+    res.status(200).json(orders);
+  } catch (error) {
+    next(error);
+  }
+}
+export const updateorderbyId = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+)=>{
+  const id = parseInt(req.params.id);
+  const { userId, productIds } = req.body;
+  const error = validateOrderInput(req.body);
+  if (error) {
+    res.status(400).json({ message: error });
+    return;
+  }
+  try {
+    const updatedOrder = await SqlOrderModel.updateOrderbyId(id, { userId, productIds });
+    res.status(200).json(updatedOrder);
+  } catch (err) {
+    next(err);
+  }
+}
+export const deleteOrderById = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+)=>{
+  const id = parseInt(req.params.id);
+  try {
+    await SqlOrderModel.deleteOrderById(id);
+    res.status(200).json({ message: `Order with id ${id} deleted successfully` });
+  } catch (error) {
+    next(error);
+  }
+} 
